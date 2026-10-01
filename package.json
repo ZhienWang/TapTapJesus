@@ -1,0 +1,58 @@
+{
+  "name": "tap-tap-jesus",
+  "productName": "Tap Tap Jesus",
+  "version": "1.0.0",
+  "description": "Baby Jesus desktop companion that slaps his manger whenever you type or click.",
+  "author": "Tap Tap Jesus",
+  "main": "src/main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "store-assets": "python tools/make_store_assets.py",
+    "dist:store": "electron-builder --win appx --x64 --arm64"
+  },
+  "build": {
+    "appId": "com.taptapjesus.companion",
+    "productName": "Tap Tap Jesus",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "baby-jesus.svg",
+      "avatars/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "npmRebuild": false,
+    "win": {
+      "icon": "assets/icon.png"
+    },
+    "appx": {
+      "identityName": "AzureStudio808.TapTapBaby",
+      "publisher": "CN=8B529D1C-253B-4AFD-BE6D-B943B6503F67",
+      "publisherDisplayName": "AzureStudio808",
+      "applicationId": "TapTapJesus",
+      "displayName": "TapTapBaby",
+      "backgroundColor": "#1c2352",
+      "languages": [
+        "en-US"
+      ],
+      "showNameOnTiles": false
+    }
+  },
+  "devDependencies": {
+    "electron": "^44.5.1",
+    "electron-builder": "^26.15.3"
+  },
+  "dependencies": {
+    "koffi": "^2.16.3",
+    "uiohook-napi": "^1.5.5"
+  },
+  "allowScripts": {
+    "uiohook-napi": false,
+    "electron-winstaller": false,
+    "koffi": false
+  }
+}

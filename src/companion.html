@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:">
+<title>Tap Tap Jesus</title>
+<style>
+  :root {
+    --panel-bg: rgba(20, 24, 58, 0.94);
+    --panel-border: rgba(255, 226, 122, 0.45);
+    --fg: #fff7d1;
+    --muted: #a9b3e0;
+    --gold: #ffd86b;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: transparent; overflow: hidden; }
+  body { font-family: system-ui, "Segoe UI", sans-serif; color: var(--fg); user-select: none; }
+
+  /* The baby sits at the bottom-left; transparent space above holds the details panel. */
+  #stage { position: absolute; left: 10px; bottom: 0; width: 230px; cursor: grab; }
+  #stage:active { cursor: grabbing; }
+  #stage svg { display: block; width: 100%; height: auto; }
+  #stage #bg { display: none; }                      /* no night sky on the desktop */
+  #stage #holyGlow { r: 128px; }                      /* shrink the glow so the window edge never crops it */
+  #stage #holyGlow, #stage use { pointer-events: none; } /* glow and sparkles are click-through */
+  #counter {
+    font: 800 30px system-ui, "Segoe UI", sans-serif;
+    fill: #fff7d1; stroke: #4a2a14; stroke-width: 5px; paint-order: stroke; stroke-linejoin: round;
+    pointer-events: none;
+  }
+
+  #menuBtn {
+    position: absolute; left: 246px; top: 250px;
+    width: 34px; height: 34px; border-radius: 10px;
+    border: 1px solid var(--panel-border); background: var(--panel-bg);
+    display: grid; place-content: center; gap: 4px; cursor: pointer; padding: 0;
+    opacity: 0.55; transition: opacity 150ms;
+  }
+  #menuBtn:hover, #menuBtn.open { opacity: 1; }
+  #menuBtn span { display: block; width: 16px; height: 2px; border-radius: 1px; background: var(--gold); }
+
+  #panel {
+    position: absolute; left: 8px; right: 8px; top: 8px;
+    background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 14px;
+    padding: 12px 14px; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+    z-index: 2; /* sits above the baby, whose box overlaps the bottom of the panel */
+    opacity: 0; transform: translateY(8px); pointer-events: none;
+    transition: opacity 150ms, transform 150ms;
+  }
+  #panel.open { opacity: 1; transform: none; pointer-events: auto; }
+  #panel header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+  #panel .tabs { display: flex; gap: 4px; }
+  #panel .tabs button {
+    flex: none; padding: 3px 9px; font-size: 12px; font-weight: 700; color: var(--muted);
+    background: transparent; border-color: transparent;
+  }
+  #panel .tabs button.active { color: var(--gold); background: rgba(255, 216, 107, 0.12); border-color: rgba(255, 216, 107, 0.35); }
+  #panel [data-tab-panel]:not(.active) { display: none; }
+  #appList { list-style: none; margin: 0; padding: 0; display: grid; row-gap: 4px; font-size: 12.5px; }
+  #appList li { position: relative; display: grid; grid-template-columns: 16px 1fr auto; gap: 6px; align-items: center; padding: 2px 4px; border-radius: 5px; overflow: hidden; }
+  #appList .bar { position: absolute; inset: 0 auto 0 0; background: rgba(255, 216, 107, 0.13); border-radius: 5px; z-index: -1; }
+  #appList .rank { color: var(--muted); font-size: 11px; text-align: right; }
+  #appList .name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #appList .time { font-weight: 600; font-variant-numeric: tabular-nums; }
+  #appList .empty { display: block; color: var(--muted); font-size: 12px; padding: 18px 4px; text-align: center; }
+  #appsTotal { display: flex; justify-content: space-between; margin-top: 6px; padding-top: 5px; border-top: 1px solid rgba(255,255,255,0.12); font-size: 13px; font-weight: 800; }
+  #appsTotal small { color: var(--muted); font-weight: 400; font-size: 11px; }
+  #btnChooseApps { display: block; width: 100%; margin-top: 8px; }
+
+  .lvl { display: flex; align-items: baseline; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .lvl b { color: var(--fg); font-size: 14px; }
+  #roster { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  #roster button {
+    position: relative; width: 100%; aspect-ratio: 5 / 4; padding: 0; border-radius: 10px; overflow: hidden;
+    background: rgba(255, 255, 255, 0.06); border: 1.5px solid rgba(255, 255, 255, 0.15);
+  }
+  #roster button.active { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(255, 216, 107, 0.3); }
+  #roster button.locked { cursor: default; }
+  #roster img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  #roster button.locked img { filter: brightness(0) opacity(0.55); }
+  #roster .tag {
+    position: absolute; left: 0; right: 0; bottom: 0; font-size: 9.5px; font-weight: 700; padding: 1px 0;
+    background: rgba(10, 12, 30, 0.75); color: var(--fg);
+  }
+  #roster button.locked .tag { color: var(--muted); }
+  #nextUnlock { margin-top: 6px; font-size: 11.5px; color: var(--muted); }
+  #nextUnlock b { color: var(--fg); }
+  .bar-track { height: 7px; border-radius: 4px; background: rgba(255, 255, 255, 0.1); margin-top: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; width: 0; border-radius: 4px; background: linear-gradient(90deg, #ffd86b, #ff9f43); transition: width 300ms; }
+
+  #toast {
+    position: absolute; left: 10px; right: 10px; top: 150px; z-index: 3; pointer-events: none;
+    padding: 10px 12px; border-radius: 12px; text-align: center;
+    background: linear-gradient(135deg, #ffd86b, #ff9f43); color: #3a1d00; font-weight: 800; font-size: 13px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35); opacity: 0; transform: translateY(10px) scale(0.95);
+    transition: opacity 250ms, transform 250ms;
+  }
+  #toast small { display: block; font-weight: 600; font-size: 11px; opacity: 0.85; }
+  #toast.show { opacity: 1; transform: none; }
+  #stage.celebrate svg { animation: hop 600ms ease-out 2; }
+  @keyframes hop { 30% { transform: translateY(-14px) scale(1.04); } 60% { transform: translateY(0) scale(0.98); } }
+  #panel .since { font-size: 11px; color: var(--muted); }
+  #panel dl { margin: 0; display: grid; grid-template-columns: 1fr auto; row-gap: 5px; font-size: 13px; }
+  #panel dt { color: var(--muted); }
+  #panel dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+  #panel dt.total, #panel dd.total { color: var(--fg); font-weight: 800; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 5px; }
+  #panel .actions { display: flex; gap: 6px; margin-top: 10px; }
+  #panel button {
+    flex: 1; font: inherit; font-size: 12px; color: var(--fg); cursor: pointer;
+    background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px; padding: 5px 0;
+  }
+  #panel button:hover { background: rgba(255, 255, 255, 0.18); }
+  #panel button.danger:hover { background: rgba(255, 110, 110, 0.3); }
+  #panel #btnDonate {
+    display: block; width: 100%; margin-top: 6px; font-weight: 700;
+    background: #ffc439; color: #142c8e; border-color: #ffc439;
+  }
+  #panel #btnDonate:hover { background: #ffd56b; }
+</style>
+</head>
+<body>
+<section id="panel" aria-label="Details">
+  <header>
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" data-tab="stats" class="active">Stats</button>
+      <button type="button" role="tab" data-tab="apps">Apps</button>
+      <button type="button" role="tab" data-tab="unlocks">Unlocks</button>
+    </div>
+    <span class="since" id="since"></span>
+  </header>
+  <div data-tab-panel="stats" class="active">
+  <dl>
+    <dt>Keystrokes</dt><dd id="statKeys">0</dd>
+    <dt>Left clicks</dt><dd id="statLeft">0</dd>
+    <dt>Right clicks</dt><dd id="statRight">0</dd>
+    <dt>Mouse traveled</dt><dd id="statMiles">0 mi</dd>
+    <dt class="total">Total taps</dt><dd class="total" id="statTotal">0</dd>
+  </dl>
+  <div class="actions">
+    <button id="btnReset" class="danger" type="button">Reset</button>
+    <button id="btnHide" type="button">Hide</button>
+    <button id="btnQuit" type="button">Quit</button>
+  </div>
+  <button id="btnDonate" type="button">♥ Donate with PayPal</button>
+  </div>
+  <div data-tab-panel="apps">
+    <ol id="appList"></ol>
+    <div id="appsTotal"><span>Total time used <small id="appsCount"></small></span><span id="appsTotalTime">0m</span></div>
+    <button id="btnChooseApps" type="button">Choose apps to track…</button>
+  </div>
+  <div data-tab-panel="unlocks">
+    <div class="lvl"><span><b id="lvNum">Level 1</b> of <span id="lvMax">7</span></span><span id="lvActive"></span></div>
+    <ul id="roster"></ul>
+    <div id="nextUnlock"></div>
+  </div>
+</section>
+
+<div id="stage"></div>
+<div id="toast" role="status"></div>
+
+<button id="menuBtn" type="button" aria-label="Details"><span></span><span></span><span></span></button>
+
+<script src="companion.js"></script>
+</body>
+</html>

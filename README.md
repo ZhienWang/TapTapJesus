@@ -52,6 +52,18 @@ Or double-click [start.cmd](start.cmd), which runs the installed Electron direct
 
 > In a VS Code terminal, `ELECTRON_RUN_AS_NODE` may be set, which makes Electron start as plain Node and crash. `start.cmd` clears it; with `npm start`, unset it first.
 
+## Standalone download
+
+[release/TapTapBaby-1.0.0-portable.exe](release/TapTapBaby-1.0.0-portable.exe) is a single portable executable for 64-bit Windows 10 and 11. It needs no install and no Store: double-click it and the companion appears above your taskbar. It's unsigned, so Windows SmartScreen may warn on first launch; choose **More info → Run anyway**.
+
+To build it yourself:
+
+```sh
+npm run dist:portable
+```
+
+This writes `dist/TapTapBaby-<version>-portable.exe`.
+
 ## Building for the Microsoft Store
 
 ```sh

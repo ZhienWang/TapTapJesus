@@ -9,7 +9,8 @@
   "scripts": {
     "start": "electron .",
     "store-assets": "python tools/make_store_assets.py",
-    "dist:store": "electron-builder --win appx --x64 --arm64"
+    "dist:store": "electron-builder --win appx --x64 --arm64",
+    "dist:portable": "electron-builder --win portable --x64"
   },
   "build": {
     "appId": "com.taptapjesus.companion",
@@ -23,7 +24,11 @@
       "baby-jesus.svg",
       "avatars/**/*",
       "assets/**/*",
-      "package.json"
+      "package.json",
+      "!node_modules/koffi/build/koffi/!(win32_x64|win32_arm64)/**",
+      "!node_modules/koffi/{src,vendor,doc}/**",
+      "!node_modules/uiohook-napi/prebuilds/!(win32-x64|win32-arm64)/**",
+      "!node_modules/uiohook-napi/{src,libuiohook}/**"
     ],
     "npmRebuild": false,
     "win": {
@@ -40,7 +45,13 @@
         "en-US"
       ],
       "showNameOnTiles": false
-    }
+    },
+    "portable": {
+      "artifactName": "TapTapBaby-${version}-portable.exe"
+    },
+    "electronLanguages": [
+      "en-US"
+    ]
   },
   "devDependencies": {
     "electron": "^44.5.1",

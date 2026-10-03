@@ -11,11 +11,11 @@ A tiny chibi desk buddy who slaps along every time you type or click.
 ## Description
 Meet your new desktop companion! Tap Tap Baby sits on your screen, above the taskbar or wherever you drop it, and bounces its little fists every time you type or click, in any app.
 
-Every keystroke and click counts. Watch the counter climb on your companion's manger, treasure chest or keyboard, and level up to unlock new characters:
+Every keystroke and click counts. Watch the counter climb on your companion's manger, toy box or carrot crate, and level up to unlock new characters:
 
 • Baby Jesus, your first companion, in a cozy manger
-• Ninja Kid, Straw Hat Captain, Power Fighter, Sun Swordsman and Moon Guardian, unlocked at every 10,000 taps
-• A secret final character for the most dedicated tappers
+• Kitty, Puppy, Bunny, Hamster and Fox Cub, cute pets unlocked at every 10,000 taps
+• A secret final animal friend for the most dedicated tappers
 
 Track your day at a glance:
 • Keystrokes, left clicks and right clicks, counted separately

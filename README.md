@@ -15,14 +15,14 @@ A desktop companion for Windows, in the spirit of Bongo Cat. A chibi character s
 | Level | Character | Unlocks after |
 |---|---|---|
 | 1 | Baby Jesus, in his manger | Available from the start |
-| 2 | Ninja Kid, at a ramen counter | 10,000 taps as Baby Jesus |
-| 3 | Straw Hat Captain, at a treasure chest | 10,000 taps as Ninja Kid |
-| 4 | Power Fighter, at a stone slab | 10,000 taps as Straw Hat Captain |
-| 5 | Sun Swordsman, at a taiko drum | 10,000 taps as Power Fighter |
-| 6 | Moon Guardian, at a vanity desk | 10,000 taps as Sun Swordsman |
-| 7 | Hatsune Miku, at a synth (the final unlock) | 25,000 taps as Moon Guardian |
+| 2 | Kitty, at a basket of yarn | 10,000 taps as Baby Jesus |
+| 3 | Puppy, at a toy box | 10,000 taps as Kitty |
+| 4 | Bunny, at a crate of carrots | 10,000 taps as Puppy |
+| 5 | Hamster, at a sack of sunflower seeds | 10,000 taps as Bunny |
+| 6 | Fox Cub, on a forest stump | 10,000 taps as Hamster |
+| 7 | Panda, at a bamboo table (the final unlock) | 25,000 taps as Fox Cub |
 
-Characters 2–6 are original chibi designs inspired by popular anime archetypes. Hatsune Miku is a character of Crypton Future Media, INC. ([piapro.net](https://piapro.net)) and appears here as fan art.
+Characters 2–7 are original chibi pet designs. If you're updating from an older version, characters you had already unlocked carry over to the animal at the same level, along with their tap counts.
 
 ## Using it
 
@@ -78,8 +78,7 @@ All characters are hand-built SVGs. The scripts need Python with Playwright (`pi
 
 | Command | What it makes |
 |---|---|
-| `python tools/make_characters.py` | The five unlockable characters in `avatars/` |
-| `python tools/make_miku.py` | `avatars/miku.svg` |
+| `python tools/make_characters.py` | The six unlockable animal characters in `avatars/` |
 | `python tools/make_thumbnails.py` | Unlock-tab thumbnails in `assets/avatars/` |
 | `python tools/make_store_assets.py` | Store tile images in `build/appx/` |
 

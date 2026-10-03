@@ -19,13 +19,13 @@ const DONATE_URL = 'https://www.paypal.com/donate/?hosted_button_id=BZ4MBPBK4MGE
 const LEVEL_TAPS = 10_000;
 const AVATARS = [
   { id: 'jesus', label: 'Baby Jesus', file: 'baby-jesus.svg' },
-  { id: 'ninja', label: 'Ninja Kid', file: path.join('avatars', 'ninja.svg'), unlock: { after: 'jesus', taps: LEVEL_TAPS } },
-  { id: 'pirate', label: 'Straw Hat Captain', file: path.join('avatars', 'pirate.svg'), unlock: { after: 'ninja', taps: LEVEL_TAPS } },
-  { id: 'fighter', label: 'Power Fighter', file: path.join('avatars', 'fighter.svg'), unlock: { after: 'pirate', taps: LEVEL_TAPS } },
-  { id: 'swordsman', label: 'Sun Swordsman', file: path.join('avatars', 'swordsman.svg'), unlock: { after: 'fighter', taps: LEVEL_TAPS } },
-  { id: 'guardian', label: 'Moon Guardian', file: path.join('avatars', 'guardian.svg'), unlock: { after: 'swordsman', taps: LEVEL_TAPS } },
+  { id: 'kitten', label: 'Kitty', file: path.join('avatars', 'kitten.svg'), unlock: { after: 'jesus', taps: LEVEL_TAPS } },
+  { id: 'puppy', label: 'Puppy', file: path.join('avatars', 'puppy.svg'), unlock: { after: 'kitten', taps: LEVEL_TAPS } },
+  { id: 'bunny', label: 'Bunny', file: path.join('avatars', 'bunny.svg'), unlock: { after: 'puppy', taps: LEVEL_TAPS } },
+  { id: 'hamster', label: 'Hamster', file: path.join('avatars', 'hamster.svg'), unlock: { after: 'bunny', taps: LEVEL_TAPS } },
+  { id: 'fox', label: 'Fox Cub', file: path.join('avatars', 'fox.svg'), unlock: { after: 'hamster', taps: LEVEL_TAPS } },
   // The final and hardest unlock.
-  { id: 'miku', label: 'Hatsune Miku', file: path.join('avatars', 'miku.svg'), unlock: { after: 'guardian', taps: 25_000 } },
+  { id: 'panda', label: 'Panda', file: path.join('avatars', 'panda.svg'), unlock: { after: 'fox', taps: 25_000 } },
 ];
 const avatarById = (id) => AVATARS.find((a) => a.id === id);
 const isUnlocked = (id) => data.unlocked.includes(id);
@@ -64,9 +64,24 @@ function freshStats() {
   return { keystrokes: 0, leftClicks: 0, rightClicks: 0, mouseInches: 0, since: new Date().toISOString() };
 }
 
+// Saves from before the animal update used these character ids; each maps to the animal at the same level.
+const RENAMED_AVATARS = { ninja: 'kitten', pirate: 'puppy', fighter: 'bunny', swordsman: 'hamster', guardian: 'fox', miku: 'panda' };
+const renameAvatar = (id) => RENAMED_AVATARS[id] || id;
+
+function migrateAvatarIds(d) {
+  if (d.avatar) d.avatar = renameAvatar(d.avatar);
+  if (Array.isArray(d.unlocked)) d.unlocked = [...new Set(d.unlocked.map(renameAvatar))];
+  if (d.charTaps) {
+    const taps = {};
+    for (const [id, n] of Object.entries(d.charTaps)) taps[renameAvatar(id)] = (taps[renameAvatar(id)] || 0) + n;
+    d.charTaps = taps;
+  }
+  return d;
+}
+
 function loadData() {
   try {
-    const d = JSON.parse(fs.readFileSync(dataFile(), 'utf8'));
+    const d = migrateAvatarIds(JSON.parse(fs.readFileSync(dataFile(), 'utf8')));
     const stats = { ...freshStats(), ...d.stats };
     return {
       stats, position: d.position || null, scale: d.scale || 1, avatar: d.avatar || 'jesus',

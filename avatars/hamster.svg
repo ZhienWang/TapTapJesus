@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512"
+     data-name="Hamster" data-crop="96 120 320 380"
+     data-counter-x="256" data-counter-y="432" data-counter-fill="#ffffff" data-counter-stroke="#5a3414">
+  <!-- Original chibi hamster with a sack of sunflower seeds. -->
+  <style>
+    .pose-down, .mouth-open { display: none; }
+    .tap-left  #handL .pose-up, .tap-right #handR .pose-up { display: none; }
+    .tap-left  #handL .pose-down, .tap-right #handR .pose-down { display: inline; }
+    .tap-left .mouth-closed, .tap-right .mouth-closed { display: none; }
+    .tap-left .mouth-open, .tap-right .mouth-open { display: inline; }
+    .chroma #bg, .chroma #holyGlow { display: none; }
+  </style>
+  <defs>
+    <radialGradient id="sky" cx="50%" cy="40%" r="75%"><stop offset="0%" stop-color="#fff1c2"/><stop offset="60%" stop-color="#ffbf47"/><stop offset="100%" stop-color="#7a4a00"/></radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fffbe8" stop-opacity="0.85"/><stop offset="45%" stop-color="#ffd97a" stop-opacity="0.4"/><stop offset="100%" stop-color="#ffd97a" stop-opacity="0"/></radialGradient>
+    <radialGradient id="fur" cx="45%" cy="38%" r="70%"><stop offset="0%" stop-color="#ffe6b8"/><stop offset="100%" stop-color="#f0b465"/></radialGradient>
+    <linearGradient id="iris" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a1210"/><stop offset="55%" stop-color="#4a2e22"/><stop offset="100%" stop-color="#a07050"/></linearGradient>
+    <linearGradient id="desk" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#c9a46a"/><stop offset="100%" stop-color="#97733f"/></linearGradient>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+    <g id="sparkle"><path d="M0,-12 C1.5,-3 3,-1.5 12,0 C3,1.5 1.5,3 0,12 C-1.5,3 -3,1.5 -12,0 C-3,-1.5 -1.5,-3 0,-12Z" fill="#fffbe8"/></g>
+    
+  </defs>
+  <g id="bg">
+    <rect id="sky-rect" width="512" height="512" fill="url(#sky)"/>
+    <circle cx="60" cy="70" r="2" fill="#fffbe8" opacity="0.6"/>
+    <circle cx="120" cy="40" r="2" fill="#fffbe8" opacity="0.6"/>
+    <circle cx="40" cy="180" r="2" fill="#fffbe8" opacity="0.6"/>
+    <circle cx="470" cy="200" r="2" fill="#fffbe8" opacity="0.6"/>
+    <circle cx="455" cy="40" r="2" fill="#fffbe8" opacity="0.6"/>
+    <circle cx="330" cy="50" r="2" fill="#fffbe8" opacity="0.6"/>
+    <circle cx="90" cy="290" r="2" fill="#fffbe8" opacity="0.6"/>
+    <circle cx="430" cy="300" r="2" fill="#fffbe8" opacity="0.6"/>
+  </g>
+  <circle id="holyGlow" cx="256" cy="250" r="165" fill="url(#glow)"/>
+  <path d="M146,372 C146,326 186,308 226,306 L286,306 C326,308 366,326 366,372Z" fill="url(#fur)" stroke="#a0682a" stroke-width="2.5"/>
+  <ellipse cx="256" cy="352" rx="44" ry="34" fill="#fff8ea" opacity="0.95"/>
+  <circle cx="200" cy="178" r="22" fill="url(#fur)" stroke="#a0682a" stroke-width="2.5"/>
+  <circle cx="312" cy="178" r="22" fill="url(#fur)" stroke="#a0682a" stroke-width="2.5"/>
+  <circle cx="200" cy="176" r="9" fill="#ffb3c6"/><circle cx="312" cy="176" r="9" fill="#ffb3c6"/>
+  <ellipse cx="256" cy="258" rx="92" ry="78" fill="url(#fur)" stroke="#a0682a" stroke-width="2.5"/>
+  <path d="M256,190 C232,212 228,250 240,268 C246,278 266,278 272,268 C284,250 280,212 256,190Z" fill="#fff8ea" opacity="0.85"/>
+  <ellipse cx="190" cy="298" rx="34" ry="28" fill="#fff8ea"/><ellipse cx="322" cy="298" rx="34" ry="28" fill="#fff8ea"/>
+
+  <ellipse cx="222" cy="266" rx="15" ry="18" fill="#140c0a"/>
+  <ellipse cx="222" cy="270" rx="11" ry="12" fill="url(#iris)" opacity="0.9"/>
+  <circle cx="217" cy="259" r="6" fill="#ffffff"/>
+  <circle cx="228" cy="275" r="2.6" fill="#ffffff"/>
+  <ellipse cx="290" cy="266" rx="15" ry="18" fill="#140c0a"/>
+  <ellipse cx="290" cy="270" rx="11" ry="12" fill="url(#iris)" opacity="0.9"/>
+  <circle cx="285" cy="259" r="6" fill="#ffffff"/>
+  <circle cx="296" cy="275" r="2.6" fill="#ffffff"/>
+  <ellipse cx="200" cy="294" rx="15" ry="9" fill="#ff8fa8" opacity="0.55" filter="url(#soft)"/>
+  <ellipse cx="312" cy="294" rx="15" ry="9" fill="#ff8fa8" opacity="0.55" filter="url(#soft)"/>
+  <g stroke="#a0682a" stroke-width="2" stroke-linecap="round" opacity="0.7">
+    <line x1="196" y1="292" x2="168" y2="286"/><line x1="196" y1="300" x2="166" y2="302"/>
+    <line x1="316" y1="292" x2="344" y2="286"/><line x1="316" y1="300" x2="346" y2="302"/>
+  </g>
+  <path d="M249,288 Q256,284 263,288 Q260,295 256,296 Q252,295 249,288Z" fill="#ff8fa8" stroke="#a0682a" stroke-width="1.2"/>
+  <g class="mouth-closed"><path d="M256,296 L256,301 M244,300 Q250,308 256,301 Q262,308 268,300" fill="none" stroke="#a0682a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g class="mouth-open"><path d="M256,296 L256,300" stroke="#a0682a" stroke-width="2.4" stroke-linecap="round"/><ellipse cx="256" cy="309" rx="9" ry="9.5" fill="#b8405e" stroke="#a0682a" stroke-width="1.5"/><ellipse cx="256" cy="314" rx="5.5" ry="3.5" fill="#ff8fa8"/></g>
+  <path d="M104,364 L408,364 L404,486 L108,486Z" fill="url(#desk)" stroke="#8a6a3a" stroke-width="3" stroke-linejoin="round"/>
+  <g stroke="#a88b5a" stroke-width="1.5" opacity="0.5"><line x1="118" y1="366" x2="122" y2="484"/><line x1="130" y1="366" x2="134" y2="484"/><line x1="142" y1="366" x2="146" y2="484"/><line x1="154" y1="366" x2="158" y2="484"/><line x1="166" y1="366" x2="170" y2="484"/><line x1="178" y1="366" x2="182" y2="484"/><line x1="190" y1="366" x2="194" y2="484"/><line x1="202" y1="366" x2="206" y2="484"/><line x1="214" y1="366" x2="218" y2="484"/><line x1="226" y1="366" x2="230" y2="484"/><line x1="238" y1="366" x2="242" y2="484"/><line x1="250" y1="366" x2="254" y2="484"/><line x1="262" y1="366" x2="266" y2="484"/><line x1="274" y1="366" x2="278" y2="484"/><line x1="286" y1="366" x2="290" y2="484"/><line x1="298" y1="366" x2="302" y2="484"/><line x1="310" y1="366" x2="314" y2="484"/><line x1="322" y1="366" x2="326" y2="484"/><line x1="334" y1="366" x2="338" y2="484"/><line x1="346" y1="366" x2="350" y2="484"/><line x1="358" y1="366" x2="362" y2="484"/><line x1="370" y1="366" x2="374" y2="484"/><line x1="382" y1="366" x2="386" y2="484"/><line x1="394" y1="366" x2="398" y2="484"/></g>
+  <path d="M98,360 Q130,346 160,360 Q200,344 240,360 Q280,344 320,360 Q360,344 414,360 L412,372 L100,372Z" fill="#d9bf8c" stroke="#8a6a3a" stroke-width="2"/>
+  <ellipse cx="140" cy="352" rx="5" ry="9" transform="rotate(-30 140 352)" fill="#3a3a3a" stroke="#ffffff" stroke-width="1.2"/><ellipse cx="186" cy="346" rx="5" ry="9" transform="rotate(20 186 346)" fill="#3a3a3a" stroke="#ffffff" stroke-width="1.2"/><ellipse cx="226" cy="352" rx="5" ry="9" transform="rotate(-10 226 352)" fill="#3a3a3a" stroke="#ffffff" stroke-width="1.2"/><ellipse cx="300" cy="348" rx="5" ry="9" transform="rotate(25 300 348)" fill="#3a3a3a" stroke="#ffffff" stroke-width="1.2"/><ellipse cx="344" cy="352" rx="5" ry="9" transform="rotate(-20 344 352)" fill="#3a3a3a" stroke="#ffffff" stroke-width="1.2"/><ellipse cx="382" cy="346" rx="5" ry="9" transform="rotate(10 382 346)" fill="#3a3a3a" stroke="#ffffff" stroke-width="1.2"/>
+  <g id="handL">
+    <g class="pose-up">
+      <ellipse cx="190" cy="331" rx="31" ry="20" transform="rotate(40 190 331)" fill="url(#fur)" stroke="#a0682a" stroke-width="2.5"/>
+      <circle cx="160" cy="302" r="20" fill="#fff8ea" stroke="#a0682a" stroke-width="2.5"/>
+      <ellipse cx="160" cy="308" rx="8" ry="6" fill="#ff9fb6"/>
+      <circle cx="148" cy="297" r="3.6" fill="#ff9fb6"/><circle cx="157" cy="291" r="3.6" fill="#ff9fb6"/>
+      <circle cx="167" cy="292" r="3.6" fill="#ff9fb6"/><circle cx="173" cy="300" r="3.2" fill="#ff9fb6"/>
+    </g>
+    <g class="pose-down">
+      <ellipse cx="196" cy="350" rx="27" ry="20" transform="rotate(-42 196 350)" fill="url(#fur)" stroke="#a0682a" stroke-width="2.5"/>
+      <ellipse cx="180" cy="374" rx="22" ry="14" fill="#fff8ea" stroke="#a0682a" stroke-width="2.5"/>
+      <path d="M168,368 L168,376 M177,366 L177,375 M186,367 L186,376" fill="none" stroke="#a0682a" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+      <g stroke="#7a4a00" stroke-width="6.5" stroke-linecap="round"><line x1="146" y1="353" x2="155" y2="361"/><line x1="160" y1="340" x2="164" y2="351"/><line x1="138" y1="372" x2="150" y2="372"/></g>
+      <g stroke="#fffbe8" stroke-width="3.5" stroke-linecap="round"><line x1="146" y1="353" x2="155" y2="361"/><line x1="160" y1="340" x2="164" y2="351"/><line x1="138" y1="372" x2="150" y2="372"/></g>
+    </g>
+  </g>
+  <g id="handR">
+    <g transform="translate(512 0) scale(-1 1)">
+    <g class="pose-up">
+      <ellipse cx="190" cy="331" rx="31" ry="20" transform="rotate(40 190 331)" fill="url(#fur)" stroke="#a0682a" stroke-width="2.5"/>
+      <circle cx="160" cy="302" r="20" fill="#fff8ea" stroke="#a0682a" stroke-width="2.5"/>
+      <ellipse cx="160" cy="308" rx="8" ry="6" fill="#ff9fb6"/>
+      <circle cx="148" cy="297" r="3.6" fill="#ff9fb6"/><circle cx="157" cy="291" r="3.6" fill="#ff9fb6"/>
+      <circle cx="167" cy="292" r="3.6" fill="#ff9fb6"/><circle cx="173" cy="300" r="3.2" fill="#ff9fb6"/>
+    </g>
+    <g class="pose-down">
+      <ellipse cx="196" cy="350" rx="27" ry="20" transform="rotate(-42 196 350)" fill="url(#fur)" stroke="#a0682a" stroke-width="2.5"/>
+      <ellipse cx="180" cy="374" rx="22" ry="14" fill="#fff8ea" stroke="#a0682a" stroke-width="2.5"/>
+      <path d="M168,368 L168,376 M177,366 L177,375 M186,367 L186,376" fill="none" stroke="#a0682a" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+      <g stroke="#7a4a00" stroke-width="6.5" stroke-linecap="round"><line x1="146" y1="353" x2="155" y2="361"/><line x1="160" y1="340" x2="164" y2="351"/><line x1="138" y1="372" x2="150" y2="372"/></g>
+      <g stroke="#fffbe8" stroke-width="3.5" stroke-linecap="round"><line x1="146" y1="353" x2="155" y2="361"/><line x1="160" y1="340" x2="164" y2="351"/><line x1="138" y1="372" x2="150" y2="372"/></g>
+    </g>
+    </g>
+  </g>
+
+  <use href="#sparkle" transform="translate(122 150) scale(0.9)"/>
+  <use href="#sparkle" transform="translate(390 230) scale(0.7)"/>
+  <use href="#sparkle" transform="translate(372 146) scale(0.5)" opacity="0.8"/>
+</svg>
